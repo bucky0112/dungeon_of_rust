@@ -16,6 +16,7 @@ fn main() {
             WorldPlugin,
             PlayerPlugin,
             InputPlugin,
+            AttackPlugin,
         ))
         .run();
 }

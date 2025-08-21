@@ -3,6 +3,7 @@ use std::collections::HashMap;
 use crate::components::player::*;
 use crate::components::movement::Direction;
 use crate::components::camera::CameraFollow;
+use crate::components::attack::{AttackAnimation, AttackType};
 use crate::resources::sprites::DirectionSpriteHandles;
 use crate::constants::*;
 
@@ -48,6 +49,21 @@ pub fn spawn_player(mut commands: Commands, sprite_handles: Res<DirectionSpriteH
         InputVector(Vec2::ZERO),
         Speed(PLAYER_SPEED),
         initial_direction,
+        // 攻擊相關 Components
+        AttackCooldown {
+            timer: {
+                let mut timer = Timer::from_seconds(0.5, TimerMode::Once);
+                timer.tick(std::time::Duration::from_secs_f32(0.5)); // 設為已完成狀態
+                timer
+            },
+        },
+        AttackDamage(10), // 基礎攻擊傷害
+        AttackRange(100.0), // 攻擊範圍
+        AttackAnimation {
+            timer: Timer::from_seconds(0.2, TimerMode::Once), // 攻擊動畫持續0.2秒
+            is_attacking: false,
+        },
+        AttackType::Melee, // 近戰攻擊（揮劍）
     ));
     info!("騎士英雄已生成（3倍放大）！");
 }

@@ -50,4 +50,17 @@ impl Direction {
         
         Some(direction)
     }
+    
+    pub fn to_vec2(&self) -> Vec2 {
+        match self {
+            Direction::North => Vec2::Y,
+            Direction::NorthEast => Vec2::new(1.0, 1.0).normalize(),
+            Direction::East => Vec2::X,
+            Direction::SouthEast => Vec2::new(1.0, -1.0).normalize(),
+            Direction::South => Vec2::NEG_Y,
+            Direction::SouthWest => Vec2::new(-1.0, -1.0).normalize(),
+            Direction::West => Vec2::NEG_X,
+            Direction::NorthWest => Vec2::new(-1.0, 1.0).normalize(),
+        }
+    }
 }

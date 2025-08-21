@@ -1,4 +1,5 @@
 // Systems module declarations
+pub mod attack;
 pub mod input;
 pub mod movement;
 pub mod camera;
@@ -7,6 +8,7 @@ pub mod world;
 pub mod setup;
 
 // Re-export all systems for easy importing
+pub use attack::*;
 pub use input::*;
 pub use movement::*;
 pub use camera::*;
