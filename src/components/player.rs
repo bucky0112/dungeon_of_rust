@@ -1,4 +1,5 @@
 use bevy::prelude::*;
+use crate::components::attack::WeaponType;
 
 #[derive(Component)]
 pub struct Player;
@@ -29,3 +30,8 @@ pub struct AttackDamage(pub i32);
 
 #[derive(Component)]
 pub struct AttackRange(pub f32);
+
+#[derive(Component)]
+pub struct CurrentWeapon {
+    pub weapon_type: WeaponType,
+}

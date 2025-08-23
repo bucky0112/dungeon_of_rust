@@ -14,9 +14,10 @@ fn main() {
         .add_plugins((
             CameraPlugin,
             WorldPlugin,
-            PlayerPlugin,
+            // PlayerPlugin,        // 暫時禁用舊的 PlayerPlugin
             InputPlugin,
-            AttackPlugin,
+            // AttackPlugin,        // 暫時禁用舊的 AttackPlugin
+            VisualCombatPlugin,     // 使用新的視覺化戰鬥系統
         ))
         .run();
 }
