@@ -1,0 +1,19 @@
+{
+  "name": "Bow Archer",
+  "id": "4b9025fd-5f33-42ca-a0d6-a2594e478f6c",
+  "description": "skilled archer ranger holding a wooden bow, wearing green leather armor and hood, forest ranger style, aiming pose",
+  "size": 48,
+  "directions": 8,
+  "character_type": "player",
+  "weapon": "bow",
+  "directions_available": [
+    "south",
+    "west", 
+    "east",
+    "north",
+    "south-east",
+    "north-east", 
+    "north-west",
+    "south-west"
+  ]
+}

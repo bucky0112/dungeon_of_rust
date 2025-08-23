@@ -1,0 +1,19 @@
+{
+  "name": "Crystal Mage",
+  "id": "f75e51a2-df28-4a4c-8241-f9bc119bebd1",
+  "description": "wise wizard mage holding a magical staff with crystal orb, wearing purple robes with golden trim, mystical spellcaster style",
+  "size": 48,
+  "directions": 8,
+  "character_type": "player",
+  "weapon": "staff",
+  "directions_available": [
+    "south",
+    "west", 
+    "east",
+    "north",
+    "south-east",
+    "north-east", 
+    "north-west",
+    "south-west"
+  ]
+}

@@ -1,0 +1,123 @@
+{
+  "melee_weapons": [
+    {
+      "id": "bfe22cb8-0548-42cc-a74b-ff92f02233d4",
+      "name": "Viking Battle Axe",
+      "file": "melee/viking_axe.png",
+      "damage": 35,
+      "speed": 2.0,
+      "range": 1.2,
+      "type": "axe",
+      "rarity": "common"
+    },
+    {
+      "id": "7ad2e445-1128-4915-a1ae-c48a3ab8c85e", 
+      "name": "Assassin Dagger",
+      "file": "melee/assassin_dagger.png",
+      "damage": 20,
+      "speed": 0.8,
+      "range": 0.8,
+      "type": "dagger",
+      "rarity": "rare"
+    },
+    {
+      "id": "d9cad44f-6f19-4c33-896d-6335b8ab4510",
+      "name": "War Hammer", 
+      "file": "melee/war_hammer.png",
+      "damage": 45,
+      "speed": 2.5,
+      "range": 1.0,
+      "type": "hammer",
+      "rarity": "uncommon"
+    },
+    {
+      "id": "adb93b4d-7a42-4c3e-99d6-77ff1bdc56e9",
+      "name": "Katana Sword",
+      "file": "melee/katana_sword.png", 
+      "damage": 30,
+      "speed": 1.5,
+      "range": 1.1,
+      "type": "sword",
+      "rarity": "epic"
+    },
+    {
+      "id": "05708476-420f-433a-9665-d06c3dadfcd0",
+      "name": "Legendary Steel Sword",
+      "file": "../legendary_sword.png",
+      "damage": 25,
+      "speed": 1.2,
+      "range": 1.0,
+      "type": "sword", 
+      "rarity": "legendary"
+    }
+  ],
+  "ranged_weapons": [
+    {
+      "id": "5a7cc178-4fb0-475f-98a1-a92438318675",
+      "name": "Elven Longbow",
+      "file": "ranged/elven_longbow.png",
+      "damage": 25,
+      "speed": 1.8,
+      "range": 8.0,
+      "type": "bow",
+      "rarity": "rare"
+    },
+    {
+      "id": "dc8c7c7f-7e0d-47c1-b3f5-ae54b4eade71",
+      "name": "Wizard Staff",
+      "file": "ranged/wizard_staff.png",
+      "damage": 40,
+      "speed": 2.0,
+      "range": 6.0,
+      "type": "staff",
+      "rarity": "epic"
+    },
+    {
+      "id": "2e27b8c5-6446-47aa-b11d-208b16274ae6",
+      "name": "Ancient Spellbook", 
+      "file": "ranged/spellbook.png",
+      "damage": 50,
+      "speed": 3.0,
+      "range": 7.0,
+      "type": "tome",
+      "rarity": "legendary"
+    },
+    {
+      "id": "f774e3dd-4668-4767-a20b-6aefd868b93c",
+      "name": "Steel Crossbow",
+      "file": "ranged/crossbow.png",
+      "damage": 35,
+      "speed": 2.2,
+      "range": 9.0,
+      "type": "crossbow",
+      "rarity": "uncommon"
+    }
+  ],
+  "armor": [
+    {
+      "id": "eda0d85e-72a3-4d1c-bd0d-9f4edfe09add",
+      "name": "Knight Shield",
+      "file": "armor/knight_shield.png",
+      "defense": 15,
+      "type": "shield",
+      "rarity": "common"
+    },
+    {
+      "id": "aa89a71e-2c64-4b0a-be03-167bd9587c57",
+      "name": "Viking Helmet",
+      "file": "armor/viking_helmet.png", 
+      "defense": 10,
+      "type": "helmet",
+      "rarity": "uncommon"
+    },
+    {
+      "id": "4651ee5c-de8f-4aa2-a5a0-33531346b3a6",
+      "name": "Wizard Hat",
+      "file": "armor/wizard_hat.png",
+      "defense": 5,
+      "magic_power": 20,
+      "type": "helmet",
+      "rarity": "rare"
+    }
+  ]
+}

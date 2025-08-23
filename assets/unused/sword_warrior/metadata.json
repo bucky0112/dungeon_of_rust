@@ -1,0 +1,19 @@
+{
+  "name": "Sword Warrior",
+  "id": "e8af9eb2-f2a8-4998-83f6-1f364df34c2e",
+  "description": "brave warrior knight holding a steel sword, wearing blue armor with silver trim, medieval fantasy style, heroic pose",
+  "size": 48,
+  "directions": 8,
+  "character_type": "player",
+  "weapon": "sword",
+  "directions_available": [
+    "south",
+    "west", 
+    "east",
+    "north",
+    "south-east",
+    "north-east", 
+    "north-west",
+    "south-west"
+  ]
+}
