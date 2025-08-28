@@ -4,6 +4,9 @@
 pub const TILE_SIZE: f32 = 64.0;
 pub const GRID_SIZE: i32 = 20;
 
+// Room constants
+pub const ROOM_TILE_SIZE: f32 = 16.0;  // 房間瓷磚的實際大小
+
 // Player constants
 pub const PLAYER_SPEED: f32 = 300.0;
 pub const PLAYER_MAX_HEALTH: i32 = 100;
