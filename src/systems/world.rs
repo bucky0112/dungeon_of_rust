@@ -1,6 +1,6 @@
 use bevy::prelude::*;
 use rand::Rng;
-use crate::components::world::{GridTile, RoomTile, Room, RoomTileType, CompoundRoom, CompoundRoomType, RoomRect};
+use crate::components::world::{GridTile, RoomTile, Room, RoomTileType, CompoundRoom, CompoundRoomType, RoomRect, Door};
 use crate::resources::RoomAssets;
 use crate::constants::*;
 
@@ -52,7 +52,7 @@ pub fn spawn_room(
             let room_x = -(room_width as i32) / 2;
             let room_y = -(room_height as i32) / 2;
             
-            generate_room_tiles(&mut commands, &asset_server, room_width, room_height, room_x, room_y);
+            generate_room_tiles(&mut commands, &asset_server, room_width, room_height, room_x, room_y, true);
             info!("矩形房間已生成 ({}x{})", room_width, room_height);
         },
         1 => {
@@ -83,6 +83,7 @@ fn generate_room_tiles(
     height: usize,
     start_x: i32,
     start_y: i32,
+    should_generate_door: bool,
 ) {
     let tile_size = ROOM_TILE_SIZE * PLAYER_SCALE;  // 使用房間瓷磚專用尺寸並考慮縮放
     let room_assets = RoomAssets::load_all(asset_server);
@@ -117,10 +118,14 @@ fn generate_room_tiles(
                 }
             } else if y == 0 {
                 // 南牆外側
+                let door_x = width / 2; // 門在牆壁中間
                 if x == 0 {
                     (RoomTileType::WallSOuterCapL, room_assets.wall_s_outer_cap_l.clone())
                 } else if x == width - 1 {
                     (RoomTileType::WallSOuterCapR, room_assets.wall_s_outer_cap_r.clone())
+                } else if x == door_x && should_generate_door {
+                    // 只有在應該生成門時才在中間位置放置門
+                    (RoomTileType::DoorClosed, room_assets.door_closed.clone())
                 } else {
                     (RoomTileType::WallSOuterMid, room_assets.wall_s_outer_mid.clone())
                 }
@@ -136,12 +141,19 @@ fn generate_room_tiles(
             };
             
             // 生成瓷磚實體
-            commands.spawn((
+            let mut entity_commands = commands.spawn((
                 Sprite::from_image(texture_handle),
                 Transform::from_translation(Vec3::new(world_x, world_y, Z_LAYER_GRID + 0.1))
                     .with_scale(Vec3::splat(PLAYER_SCALE)), // 使用與玩家相同的縮放
                 RoomTile { tile_type },
             ));
+            
+            // 如果是門，添加Door組件
+            if matches!(tile_type, RoomTileType::DoorClosed | RoomTileType::DoorOpen) {
+                entity_commands.insert(Door { 
+                    is_open: tile_type == RoomTileType::DoorOpen 
+                });
+            }
         }
     }
 }
@@ -418,8 +430,17 @@ fn spawn_compound_room(
     asset_server: &AssetServer,
     compound_room: CompoundRoom,
 ) {
-    // 1. 為每個矩形生成完整房間
-    for rect in &compound_room.rectangles {
+    // 1. 找到y座標最小的矩形（最下面的房間）
+    let bottommost_rect_index = compound_room.rectangles
+        .iter()
+        .enumerate()
+        .min_by_key(|(_, rect)| rect.y)
+        .map(|(index, _)| index)
+        .unwrap_or(0);
+    
+    // 2. 為每個矩形生成完整房間，只在最下面的矩形生成門
+    for (index, rect) in compound_room.rectangles.iter().enumerate() {
+        let should_generate_door = index == bottommost_rect_index; // 只在最下面的矩形生成門
         generate_room_tiles(
             commands,
             asset_server,
@@ -427,10 +448,11 @@ fn spawn_compound_room(
             rect.height,
             rect.x,
             rect.y,
+            should_generate_door,
         );
     }
     
-    // 2. 生成連接走廊
+    // 3. 生成連接走廊
     generate_corridors(commands, asset_server, &compound_room);
     
     // 創建複合房間實體

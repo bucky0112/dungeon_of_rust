@@ -25,6 +25,14 @@ pub enum RoomTileType {
     // 左右側牆
     WallWSide,          // 西側牆
     WallESide,          // 東側牆
+    // 門
+    DoorClosed,         // 關閉的門
+    DoorOpen,           // 開啟的門
+}
+
+#[derive(Component, Debug)]
+pub struct Door {
+    pub is_open: bool,
 }
 
 #[derive(Component, Debug)]
