@@ -89,10 +89,10 @@ pub fn update_weapon_offset_system(
 
 // 系統：處理攻擊輸入和動畫觸發
 pub fn visual_attack_input_system(
-    keyboard_input: Res<ButtonInput<KeyCode>>,
+    mut attack_events: EventReader<crate::systems::input::AttackInputEvent>,
     mut weapon_query: Query<&mut WeaponSwingAnimation, With<Weapon>>,
 ) {
-    if keyboard_input.just_pressed(KeyCode::Space) {
+    for _event in attack_events.read() {
         for mut swing_animation in &mut weapon_query {
             if !swing_animation.is_attacking {
                 // 開始攻擊動畫
@@ -199,7 +199,7 @@ pub fn spawn_player_with_weapon_system(
     let player_entity = commands.spawn((
         // 玩家 Sprite
         Sprite::from_image(asset_server.load("sprites/characters/knight_lv1.png")),
-        Transform::from_translation(Vec3::new(0.0, 0.0, 0.0))
+        Transform::from_translation(Vec3::new(0.0, 300.0, 0.0))  // 生成在房間外面（更北邊）
             .with_scale(Vec3::splat(4.0)), // 增大角色
         Player,
         PlayerFacing { direction: Vec2::X }, // 默認面向右

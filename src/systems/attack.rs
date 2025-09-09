@@ -7,7 +7,7 @@ use crate::components::attack::{
 };
 
 pub fn attack_input_system(
-    keyboard_input: Res<ButtonInput<KeyCode>>,
+    mut attack_input_events: EventReader<crate::systems::input::AttackInputEvent>,
     mut attack_events: EventWriter<AttackEvent>,
     mut query: Query<(Entity, &Transform, &mut AttackCooldown, &AttackDamage, &Direction, &InputVector, &mut AttackAnimation, &CurrentWeapon), With<Player>>,
     time: Res<Time>,
@@ -17,13 +17,15 @@ pub fn attack_input_system(
         return; // 沒有玩家實體就退出
     }
     
+    // 更新所有玩家的攻擊冷卻時間
     for (_entity, transform, mut cooldown, damage, direction, input_vector, mut animation, current_weapon) in &mut query {
-        // 更新攻擊冷卻時間
         cooldown.timer.tick(time.delta());
-
-        // 檢查攻擊按鍵 (空白鍵)
-        if keyboard_input.just_pressed(KeyCode::Space) {
-            info!("空白鍵被按下！冷卻狀態: {}", cooldown.timer.finished());
+    }
+    
+    // 檢查攻擊事件
+    for _event in attack_input_events.read() {
+        for (_entity, transform, mut cooldown, damage, direction, input_vector, mut animation, current_weapon) in &mut query {
+            info!("收到攻擊輸入事件！冷卻狀態: {}", cooldown.timer.finished());
             if cooldown.timer.finished() {
                 info!("攻擊觸發！");
                 // 決定攻擊方向：如果有移動輸入就用移動方向，否則用面向方向

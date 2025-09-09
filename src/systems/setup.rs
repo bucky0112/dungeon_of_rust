@@ -39,7 +39,7 @@ pub fn spawn_player(mut commands: Commands, sprite_handles: Res<DirectionSpriteH
     commands.spawn((
         Player,
         Sprite::from_image(sprite_handle),
-        Transform::from_translation(Vec3::new(0.0, 0.0, Z_LAYER_PLAYER))
+        Transform::from_translation(Vec3::new(0.0, -400.0, Z_LAYER_PLAYER))
             .with_scale(Vec3::splat(PLAYER_SCALE)),
         Health {
             current: PLAYER_MAX_HEALTH,

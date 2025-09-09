@@ -18,6 +18,9 @@ fn main() {
             InputPlugin,
             // AttackPlugin,        // 暫時禁用舊的 AttackPlugin
             VisualCombatPlugin,     // 使用新的視覺化戰鬥系統
+            DoorInteractionPlugin,  // 門交互系統
+            WallCollisionPlugin,    // 牆壁碰撞檢測系統
+            RoomTransitionPlugin,   // 房間切換系統
         ))
         .run();
 }
